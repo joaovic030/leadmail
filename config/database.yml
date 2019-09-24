@@ -1,7 +1,7 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  host: locahost
+  host: localhost
   pool: 5
   timeout: 5000
 
