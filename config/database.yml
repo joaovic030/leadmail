@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: locahost
+  pool: 5
+  timeout: 5000
+
+development:
+  <<: *default
+  database: 'rochadb'
+  username: 'rocha'
+  password: 'rocha123'
+
+production:
+  <<: *default
+  username: 'rocha'
+  password: 'rocha123'
+  database: 'rochadb'
