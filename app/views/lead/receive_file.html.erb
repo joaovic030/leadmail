@@ -1,0 +1,10 @@
+<div class="container-fluid">
+  OK
+  <ul>
+    <% @all_elements.each do |el| %>
+      <li style="list-style: none;">
+        <%= el.gsub('=20', '') %>
+      </li>
+    <% end %>
+  </ul>
+</div>
