@@ -1,13 +1,22 @@
-<div class="container-fluid">
-  OK
-  <ul>
-    <% @all_elements.each do |el| %>
-      <li style="list-style: none;">
-        <%= el.gsub('=20', '') %>
-      </li>
-    <% end %>
-  </ul>
-  <p>
-    nada
-  </p>
+<br class="container-fluid">
+
+<!--  <ul>-->
+    <%# @all_elements.each do |el| %>
+<!--      <li style="list-style: none;">-->
+        <%#= el.gsub('=20', '') %>
+<!--      </li>-->
+    <%# end %>
+<!--  </ul>-->
+<!--  <p>-->
+    <%#= @all_elements %>
+  <% @all_elements.each_with_index do |el, index| %>
+    <strong>
+      <%= el %> </br>
+    </strong>
+
+
+  <% end %>
+<!--  </p>-->
+    <%#= @page.body %>
+<!--    <p><%#= @anchor %></p>-->
 </div>
