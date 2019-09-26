@@ -8,6 +8,8 @@ gem 'rails', '~> 5.2.2'
 gem 'execjs', '~> 2.7'
 gem 'pg', '~> 1.1', '>= 1.1.4'
 
+gem 'mail', '~> 2.7', '>= 2.7.1'
+gem 'rest-client', '~> 2.1'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use Puma as the app server
