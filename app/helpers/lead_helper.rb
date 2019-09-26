@@ -1,23 +1,43 @@
 module LeadHelper
   require 'net/pop'
+  require "base64"
+  require "mail"
+  require 'fiddle'
 
   def self.receive_email
-    pop = Net::POP3.new('pop.gmail.com')
-    pop.start('leadmail030@gmail.com', 'LEADMAIL030')             # (1)
-    if pop.mails.empty?
-      puts 'No mail.'
-    else
-      i = 0
-      pop.each_mail do |m|   # or "pop.mails.each ..."   # (2)
-        File.open("inbox/#{i}", 'w') do |f|
-          p m
-          f.write m.pop
+    # Mail.defaults do
+    #   retriever_method :pop3, :address    => "pop.gmail.com",
+    #                    :port       => 995,
+    #                    :user_name  => 'leadmail030@gmail.com',
+    #                    :password   => 'LEADMAIL030',
+    #                    :enable_ssl => true
+    # end
+    # email_first = Mail.first
+    # p "OVER HEEEEERREEEE vvv"
+    # puts email_first.parts.first.decoded
+
+
+
+    Net::POP3.enable_ssl(OpenSSL::SSL::VERIFY_NONE)
+    Net::POP3.start('pop.gmail.com', 995, 'leadmail030@gmail.com', 'LEADMAIL030') do |pop|
+
+      if pop.mails.empty?
+        puts 'No mails.'
+      else
+        puts "Mails present"
+        pop.each_mail do |mail|
+          p mail
+          p mail.header(''.dup)
+          contentbody = mail.pop(''.dup)
+          newContent = contentbody.force_encoding('UTF-8')
+          @content = Base64.decode64("#{newContent}")
+          # message = Base64.decode64(content.to_s)
+          p ">>>>>>>>>>>>>>>>>>>>>>>>>>>O CONTEUDO ESTA CONVERTIDO <<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
+          p @content
+
         end
-        m.delete
-        i += 1
       end
-      puts "#{pop.mails.size} mails popped."
+      return @content
     end
-    pop.finish
   end
 end
