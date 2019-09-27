@@ -67,4 +67,3 @@ class LeadController < ApplicationController
 
   end
 end
->>>>>>> d0a1337c645bb9b5c668a2d513546f0282c9f770

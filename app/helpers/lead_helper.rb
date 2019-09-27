@@ -5,7 +5,7 @@ module LeadHelper
   require 'fiddle'
 
   def self.receive_email
-    email_dir = '/home/rocha/applications/emails/email'
+    email_dir = '/home/rocha/applications/emails/'
     filename = "email"
     Mail.defaults do
       retriever_method :pop3, :address    => "pop.gmail.com",
