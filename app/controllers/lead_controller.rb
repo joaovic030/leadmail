@@ -11,7 +11,7 @@ class LeadController < ApplicationController
 
     LeadHelper.receive_email
     begin
-      @page = Nokogiri::HTML(open('/home/joaorocha/Documents/Projetos/emails/email'))
+      @page = Nokogiri::HTML(open('/home/rocha/applications/emails/email'))
     rescue => e
       puts "Unable to save data because #{e.message}"
     end
