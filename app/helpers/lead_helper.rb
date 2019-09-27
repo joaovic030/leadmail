@@ -5,7 +5,7 @@ module LeadHelper
   require 'fiddle'
 
   def self.receive_email
-    email_dir = '/home/webtech/RubymineProjects/leadmail/emails/'
+    email_dir = '/home/joaorocha/Documents/Projetos/emails/'
     filename = "email"
     Mail.defaults do
       retriever_method :pop3, :address    => "pop.gmail.com",
@@ -14,8 +14,9 @@ module LeadHelper
                        :password   => 'LEADMAIL030',
                        :enable_ssl => true
     end
-    unless Mail.first.blank?
-      email_first = Mail.first.parts
+    has_email = Mail.first
+    unless has_email.blank?
+      email_first = has_email.parts
       @email_decoded = email_first.parts.second.decoded
       begin
         File.open(email_dir + filename, "w+b", 0644) {|f| f.write @email_decoded}

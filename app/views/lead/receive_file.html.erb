@@ -1,22 +1,55 @@
-<br class="container-fluid">
+<style>
+  .border-primary {
+    border: 1px solid blue;
+    border-radius: 5px;
+  }
+</style>
+<div class="container-fluid">
 
-<!--  <ul>-->
-    <%# @all_elements.each do |el| %>
-<!--      <li style="list-style: none;">-->
-        <%#= el.gsub('=20', '') %>
-<!--      </li>-->
-    <%# end %>
-<!--  </ul>-->
-<!--  <p>-->
-    <%#= @all_elements %>
-  <% @all_elements.each_with_index do |el, index| %>
-    <strong>
-      <%= el %> </br>
-    </strong>
-
-
-  <% end %>
-<!--  </p>-->
-    <%#= @page.body %>
-<!--    <p><%#= @anchor %></p>-->
+<h3>Dados</h3>
+<div class="contact">
+  <div class="border-primary">
+    <% if @all_elements.present? %>
+      <% @all_elements.each_with_index do |el, index| %>
+        <strong>
+          <%= el %>
+        </strong>
+        <%= @font[index] %> <br>
+      <% end %>
+    <% else %>
+      <p> Nenhum e-mail recente recebido! </p>
+    <% end %>
+  </div>
+  <h3>Detalhes do carro</h3>
+  <div class="border-primary">
+    <% unless @headers.blank? %>
+      <% @headers.each_with_index do |el, index| %>
+        <%# if index%2 !=0 %>
+<!--          <strong>-->
+<!--            <%#= el %> </br>-->
+<!--          </strong>-->
+        <%# else %>
+<!--          <strong>-->
+<!--            <%#= el %> </br>-->
+<!--          </strong>-->
+        <%# end %>
+        <strong><%= el.to_s.gsub("<h6>", "").gsub("</h6>", "") %></strong>: <%= @content[index].to_s.gsub("<p>", "").gsub("</p>", "") %> <br>
+      <% end %>
+    <% else %>
+      <p>Não foi possivel obter os dados da URL ;(</p>
+    <% end %>
+  </div>
+  <h3> Acessórios </h3>
+  <div class="border-primary">
+    <% unless @acessories.blank? %>
+      <% @acessories.each_with_index do |el, index| %>
+        <li style="margin-left: 2em;">
+          <%= el.to_s.gsub("<p>", "").gsub("</p>", "") %>
+        </li>
+      <% end %>
+    <% else %>
+      <p>Não foi possivel obter os dados da URL ;(</p>
+    <% end %>
+  </div>
+</div>
 </div>
