@@ -24,15 +24,6 @@
   <div class="border-primary">
     <% unless @headers.blank? %>
       <% @headers.each_with_index do |el, index| %>
-        <%# if index%2 !=0 %>
-<!--          <strong>-->
-<!--            <%#= el %> </br>-->
-<!--          </strong>-->
-        <%# else %>
-<!--          <strong>-->
-<!--            <%#= el %> </br>-->
-<!--          </strong>-->
-        <%# end %>
         <strong><%= el.to_s.gsub("<h6>", "").gsub("</h6>", "") %></strong>: <%= @content[index].to_s.gsub("<p>", "").gsub("</p>", "") %> <br>
       <% end %>
     <% else %>

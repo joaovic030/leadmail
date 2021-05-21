@@ -7,16 +7,14 @@ class LeadController < ApplicationController
   end
 
   def receive_file
-    # fields = {}
 
     LeadHelper.receive_email
     begin
+      # Esta era uma path em uma droplet da DigitalOcean
       @page = Nokogiri::HTML(open('/home/rocha/applications/emails/email'))
     rescue => e
       puts "Unable to save data because #{e.message}"
     end
-    # # p @page
-    # puts " HEEEEEREEEEEEEE >>>>>>>>>>>>>>>>>>>>>>>  #{@page.css("font").map {|b| b.text}} <<<<<<<<<<<<<<<<<"
 
     begin
       @all_elements = @page.css("font b").map {|b| b.text} unless @page.nil?
@@ -33,15 +31,6 @@ class LeadController < ApplicationController
       puts "Unable to read or write data because #{e.message}"
     end
 
-    # fields['nome'] = @all_elements.to_s.downcase.include? "nome"
-    # fields['telefone'] = @all_elements.to_s.downcase.include? "telefone"
-    # fields['mensagem'] = @all_elements.to_s.downcase.include? "mensagem"
-    # fields['veiculo'] = @all_elements.to_s.downcase.include? "veiculo"
-    # fields['valor'] = @all_elements.to_s.downcase.include? "valor"
-    # puts "???????? #{@all_elements =~ /Nome/}"
-    # puts ">>>>>># #{fields}"
-    # # puts "------------------------------------ #{@link}"
-    # # @page_link = Nokogiri::HTML(open("#{@link}")) unless @link.nil?
     unless @page.nil? or @page.blank?
       @link = @page.css("font").css("a").text
       @link = @link.gsub("http://", "").strip
